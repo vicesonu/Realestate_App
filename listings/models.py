@@ -1,7 +1,7 @@
-from random import choices
+# from random import choices
 from django.db import models
 from django.utils.timezone import now
-# Create your models here.
+
 
 class listing(models.Model):
     class SaleType(models.TextChoices):
