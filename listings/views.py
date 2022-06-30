@@ -24,7 +24,7 @@ class SearchView(APIView):
 
     def post(self, request, format=None):
         queryset = listing.objects.order_by('-list_date').filter(is_published=True)
-        data = self.request.data
+        data = self.request.data 
 
         sale_type = data['sale_type']
         queryset = queryset.filter(sale_type_iexact=sale_type)
