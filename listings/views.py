@@ -6,17 +6,27 @@ from rest_framework import permissions
 from .models import listing
 from .serializers import ListingSerializer, listingDetailSerializer
 from datetime import datetime, timezone, timedelta
+from django.shortcuts import get_object_or_404
 
 class ListingsView(ListAPIView):
     queryset = listing.objects.order_by('-list_date').filter(is_published=True)
     permission_classes = (permissions.AllowAny,)
     serializer_class = ListingSerializer
     lookup_field = 'slug'
+    def get(self, request):
+        listings=listing.objects.all()
+        listings=ListingSerializer(listings, many=True).data
+        return Response(listings)
 
 class ListingView(RetrieveAPIView):
     queryset = listing.objects.order_by('-list_date').filter(is_published=True)
     serializer_class = listingDetailSerializer
     lookup_field = 'slug'
+    def get(self, request, slug):
+        listings=listing.get_Object_or_404(listings, slug)
+        listings=ListingSerializer(listings, many=True).data
+        return Response(listings)
+
 
 class SearchView(APIView):
     permission_classes = (permissions.AllowAny,)
