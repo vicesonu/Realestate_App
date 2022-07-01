@@ -14,7 +14,7 @@ class listing(models.Model):
        TOWNHOUSE = 'Townhouse'
     
     slug = models.CharField(max_length=200, unique=True)
-    tittle = models.CharField(max_length=150)
+    title = models.CharField(max_length=150)
     address = models.CharField(max_length=150)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
@@ -52,4 +52,4 @@ class listing(models.Model):
     list_date = models.DateTimeField(default=now, blank=True)
 
     def __str__(self):
-        return self.tittle
+        return self.title
